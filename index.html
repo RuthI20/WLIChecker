@@ -2,48 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Weight Loss Injection Eligibility Checker</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 2em auto;
-      padding: 1em;
-      background: #f7f7f7;
-      border-radius: 10px;
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #f0f4f5;
+      margin: 0;
+      padding: 0;
     }
-    label, legend {
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #005eb8;
+      border-bottom: 3px solid #005eb8;
+      padding-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
       font-weight: bold;
     }
-    .result {
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    fieldset {
       margin-top: 20px;
-      padding: 10px;
-      border-radius: 5px;
+      border: none;
     }
-    .eligible {
-      background-color: #d4edda;
-      color: #155724;
+    legend {
+      font-weight: bold;
+      margin-bottom: 10px;
     }
-    .ineligible {
-      background-color: #f8d7da;
-      color: #721c24;
+    .comorbidity-group label {
+      font-weight: normal;
     }
-  </style>
-</head>
-<body>
-  <h2>Check Your Eligibility for Weight Loss Injections</h2>
-
-  <form id="eligibility-form">
-    <label>Height (cm): <input type="number" id="height" required></label><br><br>
-    <label>Weight (kg): <input type="number" id="weight" required></label><br><br>
-
-    <fieldset>
-      <legend>Do you have any of the following?</legend>
-      <label><input type="checkbox" class="comorbidity"> Type 2 diabetes</label><br>
-      <label><input type="checkbox" class="comorbidity"> High blood pressure (treated)</label><br>
-      <label><input type="checkbox" class="comorbidity"> High cholesterol (treated)</label><br>
-      <label><input type="checkbox" class="comorbidity"> Obstructive sleep apnoea</label><br>
-      <label><input type="checkbox" class="comorbidity"> Cardiovascular disease (coronary heart disease, angina, heart attacks, heart failure, stroke, mini stroke/TIA, peripheral vascular disease)</label>
-    </fieldset><br>
-
-    <label for="ethnicity">Your ethnicity:</
+    button {
+      background-color: #005eb8;
+      color: white;
+      border: none;
+      padding:
