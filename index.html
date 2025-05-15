@@ -3,82 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Weight Loss Injection Eligibility Checker</title>
+  <title>Eligibility Checker</title>
   <style>
     body {
       font-family: "Segoe UI", Helvetica, Arial, sans-serif;
       background-color: #f0f4f5;
-      margin: 0;
-      padding: 0;
+      padding: 20px;
     }
     .container {
       max-width: 700px;
-      margin: 40px auto;
+      margin: auto;
+      background: white;
       padding: 20px;
-      background-color: #ffffff;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #005eb8;
-      border-bottom: 3px solid #005eb8;
-      padding-bottom: 10px;
     }
     label {
+      margin-top: 10px;
       display: block;
-      margin: 15px 0 5px;
-      font-weight: bold;
     }
-    input[type="number"],
-    select {
+    input, select {
       width: 100%;
       padding: 8px;
-      font-size: 1em;
-      border: 1px solid #ccc;
+      margin-top: 4px;
       border-radius: 4px;
+      border: 1px solid #ccc;
     }
     button {
-      background-color: #005eb8;
+      margin-top: 20px;
+      padding: 12px;
+      background: #005eb8;
       color: white;
       border: none;
-      padding: 12px 20px;
-      font-size: 1em;
+      font-size: 16px;
       border-radius: 4px;
       cursor: pointer;
-      margin-top: 20px;
-    }
-    button:hover {
-      background-color: #004b93;
     }
     .result {
-      margin-top: 30px;
+      margin-top: 20px;
       padding: 15px;
-      border-radius: 5px;
+      border-radius: 4px;
       font-weight: bold;
     }
     .eligible {
-      background-color: #d4edda;
+      background: #d4edda;
       color: #155724;
     }
     .ineligible {
-      background-color: #f8d7da;
+      background: #f8d7da;
       color: #721c24;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Weight Loss Injection Eligibility Checker</h1>
+    <h2>Weight Loss Injection Eligibility Checker</h2>
 
-    <label for="height">Height (cm):</label>
-    <input type="number" id="height" required />
+    <label>Height (cm):</label>
+    <input type="number" id="height" />
 
-    <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" required />
+    <label>Weight (kg):</label>
+    <input type="number" id="weight" />
 
-    <label for="ethnicity">Your ethnicity:</label>
-    <select id="ethnicity" required>
-      <option value="">-- Please select --</option>
+    <label>Ethnicity:</label>
+    <select id="ethnicity">
+      <option value="">-- Select --</option>
       <option value="White">White</option>
       <option value="Black African">Black African</option>
       <option value="Black Caribbean">Black Caribbean</option>
@@ -87,31 +75,31 @@
       <option value="Other">Other / Mixed</option>
     </select>
 
-    <label>Do you have Type 2 diabetes?</label>
+    <label>Type 2 diabetes:</label>
     <select class="comorbidity">
       <option value="no">No</option>
       <option value="yes">Yes</option>
     </select>
 
-    <label>Do you have high blood pressure (medicated)?</label>
+    <label>High blood pressure (medicated):</label>
     <select class="comorbidity">
       <option value="no">No</option>
       <option value="yes">Yes</option>
     </select>
 
-    <label>Do you have high cholesterol (medicated)?</label>
+    <label>High cholesterol (medicated):</label>
     <select class="comorbidity">
       <option value="no">No</option>
       <option value="yes">Yes</option>
     </select>
 
-    <label>Do you have obstructive sleep apnoea?</label>
+    <label>Obstructive sleep apnoea:</label>
     <select class="comorbidity">
       <option value="no">No</option>
       <option value="yes">Yes</option>
     </select>
 
-    <label>Do you have cardiovascular disease? (e.g. coronary heart disease, angina, heart attack, heart failure, stroke, TIA/mini-stroke, or peripheral vascular disease)</label>
+    <label>Cardiovascular disease (heart disease, stroke, angina, TIA, heart failure, peripheral vascular disease):</label>
     <select class="comorbidity">
       <option value="no">No</option>
       <option value="yes">Yes</option>
@@ -130,40 +118,8 @@
       const bmi = weight / ((height / 100) ** 2);
 
       let comorbidities = 0;
-      document.querySelectorAll(".comorbidity").forEach(select => {
-        if (select.value === "yes") comorbidities++;
+      document.querySelectorAll(".comorbidity").forEach(sel => {
+        if (sel.value === "yes") comorbidities++;
       });
 
-      const higherRiskEthnicities = ["Black African", "Black Caribbean", "Asian", "Middle Eastern"];
-      let eligible = false;
-
-      if (
-        higherRiskEthnicities.includes(ethnicity) &&
-        bmi >= 37.5 &&
-        comorbidities >= 4
-      ) {
-        eligible = true;
-      }
-
-      if (
-        (ethnicity === "White" || ethnicity === "Other") &&
-        bmi >= 40 &&
-        comorbidities >= 4
-      ) {
-        eligible = true;
-      }
-
-      const resultDiv = document.getElementById("result");
-      resultDiv.style.display = "block";
-
-      if (eligible) {
-        resultDiv.textContent = `✅ You are eligible for weight loss injections. Your BMI is ${bmi.toFixed(1)} and you reported ${comorbidities} condition(s).`;
-        resultDiv.className = "result eligible";
-      } else {
-        resultDiv.textContent = `❌ You are not currently eligible. Your BMI is ${bmi.toFixed(1)} and you reported ${comorbidities} condition(s).`;
-        resultDiv.className = "result ineligible";
-      }
-    });
-  </script>
-</body>
-</html>
+      const higherRisk = ["]()
