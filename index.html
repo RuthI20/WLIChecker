@@ -1,115 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Weight Loss Injection Eligibility Checker</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #f0f4f5;
+      margin: 0;
+      padding: 0;
     }
-    h2 { color: #2e6da4; }
-    label { display: block; margin: 10px 0 5px; }
-    input, select {
-      padding: 8px;
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #005eb8;
+      border-bottom: 3px solid #005eb8;
+      padding-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    input[type="number"],
+    select {
       width: 100%;
-      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
-      padding: 10px 15px;
-      background-color: #2e6da4;
+      background-color: #005eb8;
       color: white;
       border: none;
-      border-radius: 5px;
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #004b93;
     }
     .result {
-      margin-top: 20px;
+      margin-top: 30px;
+      padding: 15px;
+      border-radius: 5px;
       font-weight: bold;
+    }
+    .eligible {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .ineligible {
+      background-color: #f8d7da;
+      color: #721c24;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Weight Loss Injection Eligibility Checker</h1>
+    <form id="eligibility-form">
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" required />
 
-<h2>Weight Loss Injection Eligibility Checker</h2>
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" required />
 
-<form id="eligibilityForm">
-  <label for="height">Height (cm):</label>
-  <input type="number" id="height" required>
+      <label for="ethnicity">Your ethnicity:</label>
+      <select id="ethnicity" required>
+        <option value="">-- Please select --</option>
+        <option value="White">White</option>
+        <option value="Black African">Black African</option>
+        <option value="Black Caribbean">Black Caribbean</option>
+        <option value="Asian">Asian</option>
+        <option value="Middle Eastern">Middle Eastern</option>
+        <option value="Other">Other / Mixed</option>
+      </select>
 
-  <label for="weight">Weight (kg):</label>
-  <input type="number" id="weight" required>
+      <label>Do you have Type 2 diabetes?</label>
+      <select class="comorbidity">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
 
-  <label for="ethnicity">What is your ethnicity?</label>
-  <select id="ethnicity" required>
-    <option value="">-- Please choose --</option>
-    <option value="asian">Asian</option>
-    <option value="black_african">Black African</option>
-    <option value="black_caribbean">Black Caribbean</option>
-    <option value="middle_eastern">Middle Eastern</option>
-    <option value="white">White</option>
-    <option value="other">Other</option>
-  </select>
+      <label>Do you have high blood pressure (treated)?</label>
+      <select class="comorbidity">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
 
-  <label>Do you have Type 2 Diabetes?</label>
-  <select id="diabetes"><option value="no">No</option><option value="yes">Yes</option></select>
+      <label>Do you have high cholesterol (treated)?</label>
+      <select class="comorbidity">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
 
-  <label>Do you have high blood pressure (treated)?</label>
-  <select id="bp"><option value="no">No</option><option value="yes">Yes</option></select>
+      <label>Do you have obstructive sleep apnoea?</label>
+      <select class="comorbidity">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
 
-  <label>Do you have high cholesterol (treated)?</label>
-  <select id="cholesterol"><option value="no">No</option><option value="yes">Yes</option></select>
+      <label>Do you have cardiovascular disease? (e.g. coronary heart disease, angina, heart attack, heart failure, stroke, TIA/mini-stroke, or peripheral vascular disease)</label>
+      <select class="comorbidity">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
 
-  <label>Do you have obstructive sleep apnoea?</label>
-  <select id="apnoea"><option value="no">No</option><option value="yes">Yes</option></select>
+      <button type="submit">Check Eligibility</button>
+    </form>
 
-  <label>Do you have cardiovascular disease?</label>
-  <select id="cvd"><option value="no">No</option><option value="yes">Yes</option></select>
+    <div id="result" class="result" style="display: none;"></div>
+  </div>
 
-  <button type="submit">Check Eligibility</button>
-</form>
+  <script>
+    document.getElementById("eligibility-form").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-<div class="result" id="result"></div>
+      const height = parseFloat(document.getElementById("height").value);
+      const weight = parseFloat(document.getElementById("weight").value);
+      const ethnicity = document.getElementById("ethnicity").value;
+      const bmi = weight / ((height / 100) ** 2);
 
-<script>
-document.getElementById('eligibilityForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+      let comorbidities = 0;
+      document.querySelectorAll(".comorbidity").forEach(select => {
+        if (select.value === "yes") comorbidities++;
+      });
 
-  const height = parseFloat(document.getElementById('height').value);
-  const weight = parseFloat(document.getElementById('weight').value);
-  const ethnicity = document.getElementById('ethnicity').value;
+      const higherRiskEthnicities = ["Black African", "Black Caribbean", "Asian", "Middle Eastern"];
+      let eligible = false;
 
-  const comorbidities = [
-    document.getElementById('diabetes').value,
-    document.getElementById('bp').value,
-    document.getElementById('cholesterol').value,
-    document.getElementById('apnoea').value,
-    document.getElementById('cvd').value
-  ];
+      if (
+        higherRiskEthnicities.includes(ethnicity) &&
+        bmi >= 37.5 &&
+        comorbidities >= 4
+      ) {
+        eligible = true;
+      }
 
-  const bmi = weight / ((height / 100) ** 2);
-  const bmiRounded = bmi.toFixed(1);
+      if (
+        (ethnicity === "White" || ethnicity === "Other") &&
+        bmi >= 40 &&
+        comorbidities >= 4
+      ) {
+        eligible = true;
+      }
 
-  const comorbidityCount = comorbidities.filter(ans => ans === 'yes').length;
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
 
-  const highRiskEthnicities = ['asian', 'black_african', 'black_caribbean', 'middle_eastern'];
-  const lowerThreshold = highRiskEthnicities.includes(ethnicity) ? 37.5 : 40;
-
-  let message = `<p>Your BMI is <strong>${bmiRounded}</strong>.</p>`;
-  message += `<p>You have <strong>${comorbidityCount}</strong> comorbidity/comorbidities.</p>`;
-
-  if (bmi >= lowerThreshold && comorbidityCount >= 4) {
-    message += `<p style="color: green;">✅ Based on your answers, you may be eligible for weight loss injections. Please consult your GP.</p>`;
-  } else {
-    message += `<p style="color: red;">❌ Based on your answers, you may not currently meet the eligibility criteria.</p>`;
-  }
-
-  document.getElementById('result').innerHTML = message;
-});
-</script>
-
+      if (eligible) {
+        resultDiv.textContent = `✅ You are eligible for weight loss injections. Your BMI is ${bmi.toFixed(1)} and you reported ${comorbidities} condition(s).`;
+        resultDiv.className = "result eligible";
+      } else {
+        resultDiv.textContent = `❌ You are not currently eligible. Your BMI is ${bmi.toFixed(1)} and you reported ${comorbidities} condition(s).`;
+        resultDiv.className = "result ineligible";
+      }
+    });
+  </script>
 </body>
 </html>
