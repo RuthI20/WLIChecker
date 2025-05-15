@@ -1,150 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Eligibility Checker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weight Loss Injection Eligibility Checker</title>
   <style>
     body {
-      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-      background-color: #f0f4f5;
-      padding: 20px;
-    }
-    .container {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
       max-width: 700px;
       margin: auto;
-      background: white;
       padding: 20px;
-      border-radius: 8px;
+      color: #000;
+    }
+    h1 {
+      color: #005eb8;
     }
     label {
-      margin-top: 10px;
       display: block;
+      margin-top: 15px;
+      font-weight: bold;
     }
-    input, select {
+    select, input[type="number"] {
       width: 100%;
       padding: 8px;
-      margin-top: 4px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+      margin-top: 5px;
+    }
+    .radio-group {
+      margin-top: 5px;
+    }
+    .radio-group label {
+      font-weight: normal;
+      display: inline-block;
+      margin-right: 20px;
     }
     button {
       margin-top: 20px;
-      padding: 12px;
-      background: #005eb8;
+      background-color: #005eb8;
       color: white;
       border: none;
+      padding: 12px 20px;
       font-size: 16px;
-      border-radius: 4px;
       cursor: pointer;
+      border-radius: 5px;
     }
     .result {
       margin-top: 20px;
-      padding: 15px;
-      border-radius: 4px;
+      font-size: 18px;
       font-weight: bold;
-    }
-    .eligible {
-      background: #d4edda;
-      color: #155724;
-    }
-    .ineligible {
-      background: #f8d7da;
-      color: #721c24;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Weight Loss Injection Eligibility Checker</h2>
+  <h1>NHS Weight Loss Injection Eligibility Checker</h1>
 
-    <label>Height (cm):</label>
-    <input type="number" id="height" />
+  <label for="height">What is your height? (cm)</label>
+  <input type="number" id="height" required>
 
-    <label>Weight (kg):</label>
-    <input type="number" id="weight" />
+  <label for="weight">What is your weight? (kg)</label>
+  <input type="number" id="weight" required>
 
-    <label>Ethnicity:</label>
-    <select id="ethnicity">
-      <option value="">-- Select --</option>
-      <option value="White">White</option>
-      <option value="Black African">Black African</option>
-      <option value="Black Caribbean">Black Caribbean</option>
-      <option value="Asian">Asian</option>
-      <option value="Middle Eastern">Middle Eastern</option>
-      <option value="Other">Other / Mixed</option>
-    </select>
+  <label for="ethnicity">What is your ethnicity?</label>
+  <select id="ethnicity" required>
+    <option value="">-- Please select --</option>
+    <option value="white">White</option>
+    <option value="black african">Black African</option>
+    <option value="black caribbean">Black Caribbean</option>
+    <option value="asian">Asian</option>
+    <option value="middle eastern">Middle Eastern</option>
+    <option value="other">Other</option>
+  </select>
 
-    <label>Type 2 diabetes:</label>
-    <select class="comorbidity">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <label>High blood pressure (medicated):</label>
-    <select class="comorbidity">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <label>High cholesterol (medicated):</label>
-    <select class="comorbidity">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <label>Obstructive sleep apnoea:</label>
-    <select class="comorbidity">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <label>Cardiovascular disease (heart disease, stroke, angina, TIA, heart failure, peripheral vascular disease):</label>
-    <select class="comorbidity">
-      <option value="no">No</option>
-      <option value="yes">Yes</option>
-    </select>
-
-    <button type="button" id="check">Check Eligibility</button>
-
-    <div id="result" class="result" style="display: none;"></div>
+  <label>Do you have type 2 diabetes?</label>
+  <div class="radio-group">
+    <label><input type="radio" name="diabetes" value="yes"> Yes</label>
+    <label><input type="radio" name="diabetes" value="no"> No</label>
   </div>
 
+  <label>Do you have high blood pressure (medicated)?</label>
+  <div class="radio-group">
+    <label><input type="radio" name="bp" value="yes"> Yes</label>
+    <label><input type="radio" name="bp" value="no"> No</label>
+  </div>
+
+  <label>Do you have high cholesterol (medicated)?</label>
+  <div class="radio-group">
+    <label><input type="radio" name="cholesterol" value="yes"> Yes</label>
+    <label><input type="radio" name="cholesterol" value="no"> No</label>
+  </div>
+
+  <label>Do you have obstructive sleep apnoea?</label>
+  <div class="radio-group">
+    <label><input type="radio" name="osa" value="yes"> Yes</label>
+    <label><input type="radio" name="osa" value="no"> No</label>
+  </div>
+
+  <label>Do you have cardiovascular disease (coronary heart disease, angina, heart attacks, heart failure, stroke, mini stroke/transient ischaemic attack, peripheral vascular disease)?</label>
+  <div class="radio-group">
+    <label><input type="radio" name="cvd" value="yes"> Yes</label>
+    <label><input type="radio" name="cvd" value="no"> No</label>
+  </div>
+
+  <button onclick="checkEligibility()">Check Eligibility</button>
+
+  <div id="bmiResult" class="result"></div>
+  <div id="eligibilityResult" class="result"></div>
+
   <script>
-    document.getElementById("check").addEventListener("click", function () {
+    function checkEligibility() {
       const height = parseFloat(document.getElementById("height").value);
       const weight = parseFloat(document.getElementById("weight").value);
       const ethnicity = document.getElementById("ethnicity").value;
+
+      const comorbidities = [
+        document.querySelector('input[name="diabetes"]:checked')?.value,
+        document.querySelector('input[name="bp"]:checked')?.value,
+        document.querySelector('input[name="cholesterol"]:checked')?.value,
+        document.querySelector('input[name="osa"]:checked')?.value,
+        document.querySelector('input[name="cvd"]:checked')?.value,
+      ];
+
+      if (isNaN(height) || isNaN(weight) || ethnicity === "") {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
       const bmi = weight / ((height / 100) ** 2);
+      document.getElementById("bmiResult").innerText = `Your BMI is ${bmi.toFixed(1)}`;
 
-      let comorbidities = 0;
-      document.querySelectorAll(".comorbidity").forEach(sel => {
-        if (sel.value === "yes") comorbidities++;
-      });
+      const yesComorbidities = comorbidities.filter(val => val === "yes").length;
 
-      const higherRisk = ["Black African", "Black Caribbean", "Asian", "Middle Eastern"];
-      const isHighRiskEthnicity = higherRisk.includes(ethnicity);
+      const ethnicGroupLower = ethnicity.toLowerCase();
+      const highRiskEthnicities = [
+        "asian", "black african", "black caribbean", "middle eastern"
+      ];
 
       let eligible = false;
 
-      if (isHighRiskEthnicity && bmi >= 37.5 && comorbidities >= 4) {
-        eligible = true;
-      }
-
-      if (!isHighRiskEthnicity && bmi >= 40 && comorbidities >= 4) {
-        eligible = true;
-      }
-
-      const resultDiv = document.getElementById("result");
-      resultDiv.style.display = "block";
-      if (eligible) {
-        resultDiv.textContent = `✅ You are eligible. BMI: ${bmi.toFixed(1)} | Comorbidities: ${comorbidities}`;
-        resultDiv.className = "result eligible";
+      if (highRiskEthnicities.includes(ethnicGroupLower)) {
+        if (bmi >= 37.5 && yesComorbidities >= 4) eligible = true;
       } else {
-        resultDiv.textContent = `❌ Not eligible. BMI: ${bmi.toFixed(1)} | Comorbidities: ${comorbidities}`;
-        resultDiv.className = "result ineligible";
+        if (bmi >= 40 && yesComorbidities >= 4) eligible = true;
       }
-    });
+
+      const resultMessage = eligible
+        ? "You may be eligible, please speak to your GP practice."
+        : "You are not eligible. You can speak to your GP practice about alternative weight loss and healthy lifestyle options.";
+
+      document.getElementById("eligibilityResult").innerText = resultMessage;
+    }
   </script>
 </body>
 </html>
