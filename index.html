@@ -122,4 +122,29 @@
         if (sel.value === "yes") comorbidities++;
       });
 
-      const higherRisk = ["]()
+      const higherRisk = ["Black African", "Black Caribbean", "Asian", "Middle Eastern"];
+      const isHighRiskEthnicity = higherRisk.includes(ethnicity);
+
+      let eligible = false;
+
+      if (isHighRiskEthnicity && bmi >= 37.5 && comorbidities >= 4) {
+        eligible = true;
+      }
+
+      if (!isHighRiskEthnicity && bmi >= 40 && comorbidities >= 4) {
+        eligible = true;
+      }
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
+      if (eligible) {
+        resultDiv.textContent = `✅ You are eligible. BMI: ${bmi.toFixed(1)} | Comorbidities: ${comorbidities}`;
+        resultDiv.className = "result eligible";
+      } else {
+        resultDiv.textContent = `❌ Not eligible. BMI: ${bmi.toFixed(1)} | Comorbidities: ${comorbidities}`;
+        resultDiv.className = "result ineligible";
+      }
+    });
+  </script>
+</body>
+</html>
