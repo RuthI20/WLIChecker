@@ -69,64 +69,61 @@
 <body>
   <div class="container">
     <h1>Weight Loss Injection Eligibility Checker</h1>
-    <form id="eligibility-form">
-      <label for="height">Height (cm):</label>
-      <input type="number" id="height" required />
 
-      <label for="weight">Weight (kg):</label>
-      <input type="number" id="weight" required />
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" required />
 
-      <label for="ethnicity">Your ethnicity:</label>
-      <select id="ethnicity" required>
-        <option value="">-- Please select --</option>
-        <option value="White">White</option>
-        <option value="Black African">Black African</option>
-        <option value="Black Caribbean">Black Caribbean</option>
-        <option value="Asian">Asian</option>
-        <option value="Middle Eastern">Middle Eastern</option>
-        <option value="Other">Other / Mixed</option>
-      </select>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" required />
 
-      <label>Do you have Type 2 diabetes?</label>
-      <select class="comorbidity">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+    <label for="ethnicity">Your ethnicity:</label>
+    <select id="ethnicity" required>
+      <option value="">-- Please select --</option>
+      <option value="White">White</option>
+      <option value="Black African">Black African</option>
+      <option value="Black Caribbean">Black Caribbean</option>
+      <option value="Asian">Asian</option>
+      <option value="Middle Eastern">Middle Eastern</option>
+      <option value="Other">Other / Mixed</option>
+    </select>
 
-      <label>Do you have high blood pressure (medicated)?</label>
-      <select class="comorbidity">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+    <label>Do you have Type 2 diabetes?</label>
+    <select class="comorbidity">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
 
-      <label>Do you have high cholesterol (medicated)?</label>
-      <select class="comorbidity">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+    <label>Do you have high blood pressure (medicated)?</label>
+    <select class="comorbidity">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
 
-      <label>Do you have obstructive sleep apnoea?</label>
-      <select class="comorbidity">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+    <label>Do you have high cholesterol (medicated)?</label>
+    <select class="comorbidity">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
 
-      <label>Do you have cardiovascular disease? (e.g. coronary heart disease, angina, heart attack, heart failure, stroke, TIA/mini-stroke, or peripheral vascular disease)</label>
-      <select class="comorbidity">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+    <label>Do you have obstructive sleep apnoea?</label>
+    <select class="comorbidity">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
 
-      <button type="submit">Check Eligibility</button>
-    </form>
+    <label>Do you have cardiovascular disease? (e.g. coronary heart disease, angina, heart attack, heart failure, stroke, TIA/mini-stroke, or peripheral vascular disease)</label>
+    <select class="comorbidity">
+      <option value="no">No</option>
+      <option value="yes">Yes</option>
+    </select>
+
+    <button type="button" id="check">Check Eligibility</button>
 
     <div id="result" class="result" style="display: none;"></div>
   </div>
 
   <script>
-    document.getElementById("eligibility-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-
+    document.getElementById("check").addEventListener("click", function () {
       const height = parseFloat(document.getElementById("height").value);
       const weight = parseFloat(document.getElementById("weight").value);
       const ethnicity = document.getElementById("ethnicity").value;
@@ -164,4 +161,9 @@
         resultDiv.className = "result eligible";
       } else {
         resultDiv.textContent = `❌ You are not currently eligible. Your BMI is ${bmi.toFixed(1)} and you reported ${comorbidities} condition(s).`;
-        result
+        resultDiv.className = "result ineligible";
+      }
+    });
+  </script>
+</body>
+</html>
