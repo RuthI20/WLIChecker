@@ -93,13 +93,13 @@
         <option value="yes">Yes</option>
       </select>
 
-      <label>Do you have high blood pressure (treated)?</label>
+      <label>Do you have high blood pressure (medicated)?</label>
       <select class="comorbidity">
         <option value="no">No</option>
         <option value="yes">Yes</option>
       </select>
 
-      <label>Do you have high cholesterol (treated)?</label>
+      <label>Do you have high cholesterol (medicated)?</label>
       <select class="comorbidity">
         <option value="no">No</option>
         <option value="yes">Yes</option>
@@ -164,9 +164,4 @@
         resultDiv.className = "result eligible";
       } else {
         resultDiv.textContent = `❌ You are not currently eligible. Your BMI is ${bmi.toFixed(1)} and you reported ${comorbidities} condition(s).`;
-        resultDiv.className = "result ineligible";
-      }
-    });
-  </script>
-</body>
-</html>
+        result
