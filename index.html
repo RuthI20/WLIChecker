@@ -204,47 +204,60 @@
   <div id="bmiResult" class="result"></div>
   <div id="eligibilityResult" class="result"></div>
 
-  <script>
-    function checkEligibility() {
-      const height = parseFloat(document.getElementById("height").value);
-      const weight = parseFloat(document.getElementById("weight").value);
-      const ethnicity = document.getElementById("ethnicity").value;
-      const comorbidities = [
-        document.getElementById("diabetes").value,
-        document.getElementById("bp").value,
-        document.getElementById("cholesterol").value,
-        document.getElementById("osa").value,
-        document.getElementById("cvd").value
-      ];
+<script>
+  function checkEligibility() {
+    const height = parseFloat(document.getElementById("height").value);
+    const weight = parseFloat(document.getElementById("weight").value);
+    const ethnicity = document.getElementById("ethnicity").value;
+    const comorbidities = [
+      document.getElementById("diabetes").value,
+      document.getElementById("bp").value,
+      document.getElementById("cholesterol").value,
+      document.getElementById("osa").value,
+      document.getElementById("cvd").value
+    ];
 
-      if (isNaN(height) || isNaN(weight) || ethnicity === "" || comorbidities.includes("")) {
-        alert("Please complete all fields.");
-        return;
-      }
-
-      const bmi = weight / ((height / 100) ** 2);
-      document.getElementById("bmiResult").innerText = `Your BMI is ${bmi.toFixed(1)}`;
-
-      const yesCount = comorbidities.filter(val => val === "yes").length;
-      const highRiskEthnicities = ["asian", "black african", "black caribbean", "middle eastern"];
-      let eligible = false;
-
-      if (highRiskEthnicities.includes(ethnicity.toLowerCase())) {
-        if (bmi >= 37.5 && yesCount >= 4) eligible = true;
-      } else {
-        if (bmi >= 40 && yesCount >= 4) eligible = true;
-      }
-
-      const resultBox = document.getElementById("eligibilityResult");
-      if (eligible) {
-        resultBox.className = "result success";
-        resultBox.innerText = "You may be eligible, please speak to your GP practice.";
-      } else {
-        resultBox.className = "result error";
-        resultBox.innerText = "You are not eligible.";
-      }
+    if (isNaN(height) || isNaN(weight) || ethnicity === "" || comorbidities.includes("")) {
+      alert("Please complete all fields.");
+      return;
     }
-  </script>
+
+    const bmi = weight / ((height / 100) ** 2);
+    document.getElementById("bmiResult").innerText = `Your BMI is ${bmi.toFixed(1)}`;
+
+    const yesCount = comorbidities.filter(val => val === "yes").length;
+    const highRiskEthnicities = ["asian", "black african", "black caribbean", "middle eastern"];
+    const isHighRisk = highRiskEthnicities.includes(ethnicity.toLowerCase());
+
+    let eligible = false;
+    let futureEligible = false;
+
+    if (isHighRisk) {
+      if (bmi >= 37.5 && yesCount >= 4) eligible = true;
+      else if ((bmi >= 35 && bmi < 37.5 && yesCount >= 4) || (bmi >= 37.5 && yesCount >= 3)) futureEligible = true;
+    } else {
+      if (bmi >= 40 && yesCount >= 4) eligible = true;
+      else if ((bmi >= 35 && bmi < 40 && yesCount >= 4) || (bmi >= 40 && yesCount >= 3)) futureEligible = true;
+    }
+
+    const resultBox = document.getElementById("eligibilityResult");
+
+    if (eligible) {
+      resultBox.className = "result success";
+      resultBox.innerText = "You may be eligible, please speak to your GP practice.";
+    } else if (futureEligible) {
+      resultBox.className = "result";
+      resultBox.style.backgroundColor = '#fff3cd';
+      resultBox.style.color = '#856404';
+      resultBox.style.border = '1px solid #ffeeba';
+      resultBox.innerText = "You are not currently eligible, but may be eligible within the next two years.";
+    } else {
+      resultBox.className = "result error";
+      resultBox.innerText = "You are not eligible. You can speak to your GP practice about alternative weight loss and healthy lifestyle options.";
+    }
+  }
+</script>
+
 
   <p>
     If you are currently eligible for Mounjaro on the NHS, please contact the practice.
