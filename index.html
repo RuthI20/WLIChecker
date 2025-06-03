@@ -2,90 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Weight Loss Injection Eligibility Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brinnington Surgery Weight Loss Eligibility Checker</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #ffffff;
       color: #0b0c0c;
-      max-width: 700px;
-      margin: 0 auto;
+      margin: 0;
       padding: 20px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
     }
-
-    h1 {
+    h1, h2 {
       color: #005eb8;
-      font-size: 28px;
-      margin-bottom: 10px;
     }
-
+    select, input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
     label {
       display: block;
-      margin-top: 20px;
-      font-weight: 600;
-      font-size: 16px;
+      margin-top: 15px;
+      font-weight: bold;
     }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      font-size: 16px;
-      border: 1px solid #b1b4b6;
-      border-radius: 4px;
-    }
-
     button {
-      margin-top: 30px;
       background-color: #005eb8;
       color: white;
+      padding: 12px;
+      font-size: 16px;
       border: none;
-      padding: 12px 20px;
-      font-size: 18px;
+      border-radius: 4px;
+      margin-top: 20px;
       cursor: pointer;
-      border-radius: 4px;
-      width: 100%;
     }
-
-    button:hover {
-      background-color: #004a99;
-    }
-
     .result {
-      margin-top: 30px;
-      padding: 15px;
+      margin-top: 20px;
+      font-weight: bold;
+      padding: 10px;
       border-radius: 4px;
-      font-size: 18px;
-      font-weight: 600;
     }
-
     .success {
-      background-color: #d1e7dd;
-      color: #0f5132;
-      border: 1px solid #badbcc;
+      background-color: #d4edda;
+      color: #155724;
     }
-
     .error {
       background-color: #f8d7da;
-      color: #842029;
-      border: 1px solid #f5c2c7;
-    }
-
-    @media screen and (max-width: 600px) {
-      h1 {
-        font-size: 24px;
-      }
-
-      button {
-        font-size: 16px;
-      }
+      color: #721c24;
     }
   </style>
 </head>
 <body>
-  <h1>Weight Loss Injection Eligibility Checker</h1>
+  <h1>Brinnington Surgery</h1>
 
+  <p>
+    At Brinnington Surgery we want to support you to improve your health and feel better.
+    As a practice we are committed to working with our patients to support weight loss and
+    healthy lifestyle changes. We recognise this can be difficult and aim to give as much
+    support as possible.
+  </p>
+
+  <p>
+    We can help you access a number of options including support with healthy eating and
+    exercise and access to NHS digital weight loss programmes.
+  </p>
+
+  <p>
+    If you have a BMI &ge;40 (or &ge;37.5 for Black, Asian or Middle Eastern ethnicity), and have
+    4 or more medical conditions related to your weight (such as diabetes, high blood pressure,
+    sleep apnoea), you may also be eligible for new weight loss injections. These are given
+    once a week and have been shown to improve weight, diabetes, blood pressure and even reduce
+    the risk of heart attacks and strokes.
+  </p>
+
+  <h2>Check your eligibility below:</h2>
+
+  <!-- ELIGIBILITY CALCULATOR -->
   <label for="height">What is your height? (cm)</label>
   <input type="number" id="height" required />
 
@@ -131,7 +128,7 @@
     <option value="no">No</option>
   </select>
 
-  <label for="cvd">Do you have cardiovascular disease (coronary heart disease, angina, heart attacks, heart failure, stroke, mini stroke/transient ischaemic attack, peripheral vascular disease)?</label>
+  <label for="cvd">Do you have cardiovascular disease (e.g. heart disease, angina, stroke)?</label>
   <select id="cvd">
     <option value="">-- Please select --</option>
     <option value="yes">Yes</option>
@@ -148,7 +145,6 @@
       const height = parseFloat(document.getElementById("height").value);
       const weight = parseFloat(document.getElementById("weight").value);
       const ethnicity = document.getElementById("ethnicity").value;
-
       const comorbidities = [
         document.getElementById("diabetes").value,
         document.getElementById("bp").value,
@@ -165,24 +161,23 @@
       const bmi = weight / ((height / 100) ** 2);
       document.getElementById("bmiResult").innerText = `Your BMI is ${bmi.toFixed(1)}`;
 
-      const yesComorbidities = comorbidities.filter(val => val === "yes").length;
-
+      const yesCount = comorbidities.filter(val => val === "yes").length;
       const highRiskEthnicities = ["asian", "black african", "black caribbean", "middle eastern"];
       let eligible = false;
 
       if (highRiskEthnicities.includes(ethnicity.toLowerCase())) {
-        if (bmi >= 37.5 && yesComorbidities >= 4) eligible = true;
+        if (bmi >= 37.5 && yesCount >= 4) eligible = true;
       } else {
-        if (bmi >= 40 && yesComorbidities >= 4) eligible = true;
+        if (bmi >= 40 && yesCount >= 4) eligible = true;
       }
 
-      const resultDiv = document.getElementById("eligibilityResult");
+      const resultBox = document.getElementById("eligibilityResult");
       if (eligible) {
-        resultDiv.className = "result success";
-        resultDiv.innerText = "You may be eligible, please speak to your GP practice.";
+        resultBox.className = "result success";
+        resultBox.innerText = "You may be eligible, please speak to your GP practice.";
       } else {
-        resultDiv.className = "result error";
-        resultDiv.innerText = "You are not eligible. You can speak to your GP practice about alternative weight loss and healthy lifestyle options.";
+        resultBox.className = "result error";
+        resultBox.innerText = "You are not eligible. Please read the information on this webpage regarding alternative weight loss and healthy lifestyle options.";
       }
     }
   </script>
