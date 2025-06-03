@@ -15,7 +15,7 @@
       max-width: 800px;
       margin: auto;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #005eb8;
     }
     select, input[type="number"] {
@@ -55,131 +55,108 @@
       background-color: #f8d7da;
       color: #721c24;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
   </style>
 </head>
 <body>
   <h1>Brinnington Surgery</h1>
+  <h2>Healthy Lifestyle & Weight Management Advice</h2>
+
+  <h3>What is BMI?</h3>
+  <p>
+    Body Mass Index (BMI) is a measure that uses your height and weight to determine if you're a healthy weight.
+  </p>
+
+  <table>
+    <tr><th>Underweight</th><th>Healthy Weight</th><th>Overweight</th><th>Obese</th><th>Severely Obese</th></tr>
+    <tr><td>Below 18.5</td><td>18.5 to 24.9</td><td>25 to 29.9</td><td>30 to 39.9</td><td>BMI 40 +</td></tr>
+  </table>
 
   <p>
-    At Brinnington Surgery we want to support you to improve your health and feel better.
-    As a practice we are committed to working with our patients to support weight loss and
-    healthy lifestyle changes. We recognise this can be difficult and aim to give as much
-    support as possible.
+    You can calculate your BMI using the NHS BMI calculator:<br>
+    <a href="https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/" target="_blank">https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/</a>
   </p>
 
   <p>
-    We can help you access a number of options including support with healthy eating and
-    exercise and access to NHS digital weight loss programmes.
+    A high BMI can increase the risk of serious health conditions like type 2 diabetes, heart disease, and certain cancers.
+    <br>
+    More on obesity: <a href="https://www.nhs.uk/conditions/obesity/" target="_blank">https://www.nhs.uk/conditions/obesity/</a>
   </p>
+
+  <h3>Healthy Eating When Trying to Lose Weight</h3>
+  <p>
+    A healthy, balanced diet is essential to maintaining a healthy weight. This includes fruit & vegetables, wholegrains, staying hydrated and avoiding processed and unhealthy foods.
+  </p>
+  <ul>
+    <li><a href="https://www.nhs.uk/live-well/eat-well/" target="_blank">NHS Eat Well</a></li>
+    <li><a href="https://www.nhs.uk/better-health/lose-weight/healthy-eating-when-trying-to-lose-weight/" target="_blank">Healthy Eating for Weight Loss</a></li>
+    <li><a href="https://www.healthystockport.co.uk/topic/healthy-eating-and-drinking" target="_blank">Healthy Stockport</a></li>
+  </ul>
+
+  <h3>Exercising When Trying to Lose Weight</h3>
+  <p>
+    The NHS recommends that adults are active for 150 minutes each week. Being active benefits mental and physical health. Small changes like taking stairs or walking instead of driving can help.
+  </p>
+  <ul>
+    <li><a href="https://www.nhs.uk/better-health/get-active/" target="_blank">NHS Get Active</a></li>
+    <li><a href="https://www.healthystockport.co.uk/topic/move-more" target="_blank">Healthy Stockport Move More</a></li>
+    <li><a href="https://www.nhs.uk/live-well/exercise/" target="_blank">NHS Live Well Exercise</a></li>
+  </ul>
+  <p>
+    If you are inactive and have health conditions like high blood pressure, diabetes, joint pain, COPD, depression or have had a heart attack/stroke, you may be eligible for support at the gym:<br>
+    <a href="https://www.lifeleisure.net/exercise-referral/" target="_blank">Physical Activity Referral in Stockport (PARiS)</a>
+  </p>
+
+  <h3>Weight Loss Management</h3>
+  <p>
+    If you're obese and struggling to lose weight despite best efforts, weight loss medications may be considered. These include both NHS and private options:
+    <a href="https://www.nhs.uk/conditions/obesity/treatment/" target="_blank">NHS Obesity Treatment</a>
+  </p>
+
+  <h3>What are the different weight loss medications?</h3>
+  <table>
+    <tr>
+      <th>Orlistat (Xenical)</th>
+      <th>Liraglutide & Semaglutide (Saxenda & Wegovy)</th>
+      <th>Tirzepatide (Mounjaro)</th>
+    </tr>
+    <tr>
+      <td>Works by reducing fat absorption<br>Tablet<br>3x/day<br>Side effects: oily stools, gas</td>
+      <td>Feel fuller<br>Injection<br>1x/week<br>Side effects: nausea, vomiting, diarrhoea</td>
+      <td>Feel fuller longer<br>Injection<br>1x/week<br>Side effects: nausea, vomiting, diarrhoea</td>
+    </tr>
+  </table>
+
+  <h3>Am I eligible for weight loss medications?</h3>
+  <p>
+    Mounjaro (tirzepatide) is the most effective NHS medication, but has strict eligibility. It is prioritised for patients who are severely obese with multiple health conditions. This may change as access increases.
+  </p>
+
+  <h2>Eligibility Calculator</h2>
+  <!-- ELIGIBILITY CALCULATOR START -->
+  [Insert eligibility calculator]
+  <!-- ELIGIBILITY CALCULATOR END -->
 
   <p>
-    If you have a BMI &ge;40 (or &ge;37.5 for Black, Asian or Middle Eastern ethnicity), and have
-    4 or more medical conditions related to your weight (such as diabetes, high blood pressure,
-    sleep apnoea), you may also be eligible for new weight loss injections. These are given
-    once a week and have been shown to improve weight, diabetes, blood pressure and even reduce
-    the risk of heart attacks and strokes.
+    If eligible, contact the practice.<br>
+    If not eligible, follow healthy lifestyle advice or consider private consultation.
   </p>
 
-  <h2>Check your eligibility below:</h2>
-
-  <!-- ELIGIBILITY CALCULATOR -->
-  <label for="height">What is your height? (cm)</label>
-  <input type="number" id="height" required />
-
-  <label for="weight">What is your weight? (kg)</label>
-  <input type="number" id="weight" required />
-
-  <label for="ethnicity">What is your ethnicity?</label>
-  <select id="ethnicity" required>
-    <option value="">-- Please select --</option>
-    <option value="white">White</option>
-    <option value="black african">Black African</option>
-    <option value="black caribbean">Black Caribbean</option>
-    <option value="asian">Asian</option>
-    <option value="middle eastern">Middle Eastern</option>
-    <option value="other">Other</option>
-  </select>
-
-  <label for="diabetes">Do you have type 2 diabetes?</label>
-  <select id="diabetes">
-    <option value="">-- Please select --</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-
-  <label for="bp">Do you have high blood pressure (medicated)?</label>
-  <select id="bp">
-    <option value="">-- Please select --</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-
-  <label for="cholesterol">Do you have high cholesterol (medicated)?</label>
-  <select id="cholesterol">
-    <option value="">-- Please select --</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-
-  <label for="osa">Do you have obstructive sleep apnoea?</label>
-  <select id="osa">
-    <option value="">-- Please select --</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-
-  <label for="cvd">Do you have cardiovascular disease (e.g. heart disease, angina, stroke)?</label>
-  <select id="cvd">
-    <option value="">-- Please select --</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  </select>
-
-  <button onclick="checkEligibility()">Check Eligibility</button>
-
-  <div id="bmiResult" class="result"></div>
-  <div id="eligibilityResult" class="result"></div>
-
-  <script>
-    function checkEligibility() {
-      const height = parseFloat(document.getElementById("height").value);
-      const weight = parseFloat(document.getElementById("weight").value);
-      const ethnicity = document.getElementById("ethnicity").value;
-      const comorbidities = [
-        document.getElementById("diabetes").value,
-        document.getElementById("bp").value,
-        document.getElementById("cholesterol").value,
-        document.getElementById("osa").value,
-        document.getElementById("cvd").value
-      ];
-
-      if (isNaN(height) || isNaN(weight) || ethnicity === "" || comorbidities.includes("")) {
-        alert("Please complete all fields.");
-        return;
-      }
-
-      const bmi = weight / ((height / 100) ** 2);
-      document.getElementById("bmiResult").innerText = `Your BMI is ${bmi.toFixed(1)}`;
-
-      const yesCount = comorbidities.filter(val => val === "yes").length;
-      const highRiskEthnicities = ["asian", "black african", "black caribbean", "middle eastern"];
-      let eligible = false;
-
-      if (highRiskEthnicities.includes(ethnicity.toLowerCase())) {
-        if (bmi >= 37.5 && yesCount >= 4) eligible = true;
-      } else {
-        if (bmi >= 40 && yesCount >= 4) eligible = true;
-      }
-
-      const resultBox = document.getElementById("eligibilityResult");
-      if (eligible) {
-        resultBox.className = "result success";
-        resultBox.innerText = "You may be eligible, please speak to your GP practice.";
-      } else {
-        resultBox.className = "result error";
-        resultBox.innerText = "You are not eligible. Please read the information on this webpage regarding alternative weight loss and healthy lifestyle options.";
-      }
-    }
-  </script>
+  <h3>Other Healthy Lifestyle Recommendations</h3>
+  <p>
+    For support in Stockport to quit smoking, reduce alcohol or get drug advice, contact the START team:<br>
+    <a href="https://www.stockport.gov.uk/groups/stockport-triage-assessment-and-referral-team" target="_blank">Stockport START Team</a>
+  </p>
 </body>
 </html>
